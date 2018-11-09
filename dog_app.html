@@ -11838,6 +11838,11 @@ div#notebook {
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1"># define function to load train, test, and validation datasets</span>
 <span class="k">def</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load data set:</span>
+<span class="sd">    path: dataset path</span>
+<span class="sd">    return: list of dog image files, list of dog image labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">load_files</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="n">dog_files</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;filenames&#39;</span><span class="p">])</span>
     <span class="n">dog_targets</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]),</span> <span class="mi">133</span><span class="p">)</span>
@@ -12093,6 +12098,11 @@ There are 836 test dog images.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># returns &quot;True&quot; if face is detected in image stored at img_path</span>
 <span class="k">def</span> <span class="nf">face_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect faces in an image</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: True if face is detected, otherwise False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
     <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
     <span class="n">faces</span> <span class="o">=</span> <span class="n">face_cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">gray</span><span class="p">)</span>
@@ -12262,7 +12272,11 @@ $$</p>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm</span>
 
 <span class="k">def</span> <span class="nf">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
-    <span class="c1"># loads RGB image as PIL.Image.Image type</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    loads RGB image as PIL.Image.Image type</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: image tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
     <span class="c1"># convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
@@ -12270,6 +12284,11 @@ $$</p>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">paths_to_tensor</span><span class="p">(</span><span class="n">img_paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Batch loading RGB image</span>
+<span class="sd">    img_paths: list of image paths</span>
+<span class="sd">    return: list of image tensors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">list_of_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">img_paths</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">list_of_tensors</span><span class="p">)</span>
 </pre></div>
@@ -12298,7 +12317,11 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
 
 <span class="k">def</span> <span class="nf">ResNet50_predict_labels</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
-    <span class="c1"># returns prediction vector for image located at img_path</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    returns prediction vector for image located at img_path</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: object label of the image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">preprocess_input</span><span class="p">(</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ResNet50_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
 </pre></div>
@@ -12325,6 +12348,11 @@ $$</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
 <span class="k">def</span> <span class="nf">dog_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect dogs in image</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: True if a dog is detected, otherwise False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="n">ResNet50_predict_labels</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">((</span><span class="n">prediction</span> <span class="o">&lt;=</span> <span class="mi">268</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prediction</span> <span class="o">&gt;=</span> <span class="mi">151</span><span class="p">))</span> 
 </pre></div>
@@ -14119,6 +14147,11 @@ Epoch 00025: early stopping
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">extract_bottleneck_features</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">VGG16_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    predict using VGG16 architecture</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: breed name of the detected dog</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># extract bottleneck features</span>
     <span class="n">bottleneck_feature</span> <span class="o">=</span> <span class="n">extract_VGG16</span><span class="p">(</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
     <span class="c1"># obtain predicted vector</span>
@@ -14578,6 +14611,11 @@ Epoch 00034: early stopping
 <span class="kn">from</span> <span class="nn">extract_bottleneck_features</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">trans_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict breed class using specified transfer learning architecture</span>
+<span class="sd">    img_path: image path</span>
+<span class="sd">    return: predicted breed name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># extract bottleneck features</span>
     <span class="n">bottleneck_feature</span> <span class="o">=</span> <span class="n">feat_dict</span><span class="p">[</span><span class="n">network</span><span class="p">](</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
     <span class="c1"># obtain predicted vector</span>
@@ -14618,6 +14656,13 @@ Epoch 00034: early stopping
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write your algorithm.</span>
 <span class="c1">### Feel free to use as many code cells as needed.</span>
 <span class="k">def</span> <span class="nf">predict_breed</span><span class="p">(</span><span class="n">img_file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict breed name of an image</span>
+<span class="sd">    img_file: image path</span>
+<span class="sd">    return: (&quot;dog&quot;, breed name) if a dog is detected, </span>
+<span class="sd">            (&quot;human&quot;, resembeling breed name) if a human face is detected,</span>
+<span class="sd">            None if neither human nor dog is detected</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">is_dog</span> <span class="o">=</span> <span class="n">dog_detector</span><span class="p">(</span><span class="n">img_file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">is_dog</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="n">trans_predict_breed</span><span class="p">(</span><span class="n">img_file</span><span class="p">))</span>

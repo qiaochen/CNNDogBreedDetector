@@ -25,7 +25,9 @@ directly used as the dog detector in this project, imported using keras api. For
 ### Problem Statement
 Given an image, the classifier will detect whether there is a dog. If there is a dog, the trained neural classifier will identify an estimate of the canine’s breed. If the supplied image is an image of a human, the classifier will identify the resembling dog breed.
 Below are examples of the detection and prediction results.
+
 ![Detected a Dog and Predict Its Breed](https://upload-images.jianshu.io/upload_images/3122073-7a3fdee5db3f0f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ![Detected Human Face and Predict the Resembling Dog Breed](https://upload-images.jianshu.io/upload_images/3122073-486d60aa385334cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### Metrics
@@ -35,11 +37,14 @@ Accuracy is used to measure the performance of the classifiers, based on the [co
 accuracy = (TP + TN) / (TP + TN + FP + FN) 
 ```
 The score range is [0, 1], with the 0 the worst while 1 the best.
+Accuracy is adopted because the target variable classes for most categories in the data are nearly balanced, and the target variable classes in the data are not a majority of one class. In this setting, accuracy is comparable to f1 score and is better than precision and recall which do not consider True Negatives. 
 
 2. Training Loss
 [Categorical cross-entropy](https://en.wikipedia.org/wiki/Cross_entropy) is used as the loss function for computing gradients for network optimization. The loss is based on the following equation.
+
 ![Cross-Entropy Loss](https://upload-images.jianshu.io/upload_images/3122073-0d4e31590dd61361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+Because the classification task is a multi-class prediction task, cross-entropy is adopted as the objective. From the equation above, we can know that cross-entropy loss rewards/ penalizes probabilities of correct classes only. The value is independent of how the remaining probability is split between incorrect classes.
 ---
 ## Analysis
 Let us focus on the dog breed dataset, on which I will train and validate the dog breed classifier. As has been mentioned above, there are 133 total dog categories and 8351 total dog images in the dataset. The training, validation and testing sets contain 6680, 835 and 836 dog images respectively.
